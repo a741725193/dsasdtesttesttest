@@ -1,0 +1,5 @@
+config SHIELD_DSASDTEST_LEFT
+    def_bool $(shields_list_contains,dsasdtest_left)
+
+config SHIELD_DSASDTEST_RIGHT
+    def_bool $(shields_list_contains,dsasdtest_right)

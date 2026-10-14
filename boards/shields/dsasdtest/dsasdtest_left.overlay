@@ -1,0 +1,29 @@
+#include "dsasdtest.dtsi"
+
+/ {
+    kscan0: kscan0 {
+        compatible = "zmk,kscan-gpio-direct";
+        wakeup-source;
+
+        input-gpios
+            = <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            , <&pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+            ;
+    };
+};
+
+&physical_layout_dsasdtest {
+    kscan = <&kscan0>;
+};
+// == Input devices ==
+// Input devices on this central part
+// Enabling input listeners and pointing them to the input devices
+&input_listener_left0 {
+    status = "okay";
+    device = <&input_device_left0>;
+};
+// Input devices on peripheral parts
+// Enabling input listeners and input-split to receive input events from peripherals
+&input_split_right0 { status = "okay"; };
+&input_listener_right0 { status = "okay"; };
+

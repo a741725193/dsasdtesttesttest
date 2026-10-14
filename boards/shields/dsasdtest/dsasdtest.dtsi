@@ -1,0 +1,50 @@
+#include "dsasdtest-layouts.dtsi"
+#include <dt-bindings/zmk/matrix_transform.h>
+
+/ {
+    matrix_transform0: matrix_transform0 {
+        compatible = "zmk,matrix-transform";
+        columns = <2>;
+        rows = <2>;
+        map = <
+            RC(0,0) RC(0,1) RC(1,0) RC(1,1)
+        >;
+    };
+};
+
+&physical_layout_dsasdtest {
+    transform = <&matrix_transform0>;
+};
+
+// Input devices
+/ {
+    split_inputs {
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        input_split_left0: input_split_left0@0 {
+            compatible = "zmk,input-split";
+            reg = <0>;
+            status = "disabled";
+        };
+
+        input_split_right0: input_split_right0@1 {
+            compatible = "zmk,input-split";
+            reg = <1>;
+            status = "disabled";
+        };
+    };
+
+    input_listener_left0: input_listener_left0 {
+        compatible = "zmk,input-listener";
+        status = "disabled";
+        device = <&input_split_left0>;
+    };
+
+    input_listener_right0: input_listener_right0 {
+        compatible = "zmk,input-listener";
+        status = "disabled";
+        device = <&input_split_right0>;
+    };
+};
+
